@@ -42,12 +42,12 @@ jobs:
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
       run: |
-        git config --global user.name "trio666"
-        git config --global user.email "github@triooo.co"
+        git config --global user.name "neganok"
+        git config --global user.email "hackersvn1@gmail.com"
         EMOJIS=("🛡️" "🔒" "🌐" "💻" "📡" "🔍" "🖥️" "📊" "📈" "🗂️" "🚀" "🔥")
         RANDOM_EMOJI=${EMOJIS[$RANDOM % ${#EMOJIS[@]}]}
         TIMESTAMP=$(TZ=Asia/Jakarta date '+%H:%M %d/%m/%Y')
         git add all.txt http.txt https.txt socks4.txt socks5.txt country/
         git commit -m "Update proxy lists - $TIMESTAMP $RANDOM_EMOJI" || echo "No changes to commit"
-        git pull --rebase "https://x-access-token:${GH_PAT}@github.com/trio666/proxy-checker.git" main
-        git push "https://x-access-token:${GH_PAT}@github.com/trio666/proxy-checker.git"
+        git pull --rebase "https://x-access-token:${GH_PAT}@github.com/neganok/proxy-checker.git" main
+        git push "https://x-access-token:${GH_PAT}@github.com/neganok/proxy-checker.git"
