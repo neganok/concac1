@@ -13,7 +13,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        persist-credentials: false
+        persist-credentials: false  # Không sử dụng credentials mặc định để tránh vấn đề với authentication
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -40,7 +40,7 @@ jobs:
 
     - name: Commit and Push with Random Emoji
       env:
-        GH_PAT: ${{ secrets.GH_PAT }}
+        GH_PAT: ${{ secrets.GH_PAT }}  # Lấy token từ GitHub Secrets
       run: |
         git config --global user.name "neganok"
         git config --global user.email "hackersvn1@gmail.com"
