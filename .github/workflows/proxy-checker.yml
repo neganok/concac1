@@ -13,7 +13,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        persist-credentials: false  # Không sử dụng credentials mặc định
+        persist-credentials: false  # Không lưu credentials mặc định
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -40,7 +40,7 @@ jobs:
 
     - name: Commit and Push with Random Emoji
       env:
-        GH_PAT: ${{ secrets.GH_PAT }}  # Đảm bảo GH_PAT được lưu trong GitHub Secrets
+        GH_PAT: ${{ secrets.GH_PAT }}  # Đảm bảo token đã có trong GitHub Secrets
       run: |
         git config --global user.name "neganok"
         git config --global user.email "hackersvn1@gmail.com"
@@ -50,8 +50,8 @@ jobs:
         git add all.txt http.txt https.txt socks4.txt socks5.txt country/
         git commit -m "Update proxy lists - $TIMESTAMP $RANDOM_EMOJI" || echo "No changes to commit"
 
-        # Pull with token authentication
-        git pull --rebase "https://x-access-token:${GH_PAT}@github.com/neganok/proxy-checker.git" main
+        # Thực hiện git pull và git push bằng cách sử dụng token
+        git pull --rebase https://x-access-token:${GH_PAT}@github.com/neganok/proxy-checker.git main
 
-        # Push with token authentication
-        git push "https://x-access-token:${GH_PAT}@github.com/neganok/proxy-checker.git"
+        # Thực hiện git push với token
+        git push https://x-access-token:${GH_PAT}@github.com/neganok/proxy-checker.git
