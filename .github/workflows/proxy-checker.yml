@@ -44,14 +44,19 @@ jobs:
       run: |
         git config --global user.name "neganok"
         git config --global user.email "hackersvn1@gmail.com"
+
+        # Đảm bảo GitHub dùng token thay vì username/password
+        git remote set-url origin https://x-access-token:${GH_PAT}@github.com/neganok/proxy-checker.git
+
         EMOJIS=("🛡️" "🔒" "🌐" "💻" "📡" "🔍" "🖥️" "📊" "📈" "🗂️" "🚀" "🔥")
         RANDOM_EMOJI=${EMOJIS[$RANDOM % ${#EMOJIS[@]}]}
         TIMESTAMP=$(TZ=Asia/Jakarta date '+%H:%M %d/%m/%Y')
+
         git add all.txt http.txt https.txt socks4.txt socks5.txt country/
         git commit -m "Update proxy lists - $TIMESTAMP $RANDOM_EMOJI" || echo "No changes to commit"
 
-        # Thực hiện git pull và git push bằng cách sử dụng token
-        git pull --rebase https://x-access-token:${GH_PAT}@github.com/neganok/proxy-checker.git main
-
-        # Thực hiện git push với token
-        git push https://x-access-token:${GH_PAT}@github.com/neganok/proxy-checker.git
+        # Pull với rebase để tránh lỗi conflict
+        git pull --rebase origin main
+        
+        # Push với token
+        git push origin main
